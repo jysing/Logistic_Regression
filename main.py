@@ -12,23 +12,35 @@ def main():
 	frenchTot = frenchTot/max(max(englishTot), max(frenchTot))
 	frenchA = frenchA/max(max(englishA), max(frenchA))
 
+	#Test Gradient Descent algoirithm, Batch
 	tol = 10**-9
 	alpha = 0.005
-	stoch = False
 
-	englishA = np.c_[np.ones(englishA.shape[0]), englishA]
-	w, epochs = regression.linRegression(englishA, englishTot, tol, alpha, stoch)
-	print(w, epochs)
-	line = np.dot(englishA, w)
-	print(englishA, englishTot)
-	plt.plot(englishA[:,1], line, 'g--', englishA[:,1], englishTot, 'rs')
+	w, epochs = regression.batchGD(englishA, englishTot, tol, alpha)
+	line = w[1]*englishA+w[0]
+	plt.plot(englishA, line, 'g--', englishA, englishTot, 'rs')
 
-	frenchA = np.c_[np.ones(frenchA.shape[0]), frenchA]
-	w, epochs = regression.linRegression(frenchA, frenchTot, tol, alpha, stoch)
-	print(w, epochs)
-	line = np.dot(frenchA, w)
-	print(frenchA, frenchTot)
-	plt.plot(frenchA[:,1], line, 'b--', frenchA[:,1], frenchTot, 'ys')
+	w, epochs = regression.batchGD(frenchA, frenchTot, tol, alpha)
+	line = w[1]*frenchA+w[0]
+	plt.plot(frenchA, line, 'b--', frenchA, frenchTot, 'ys')
+
+	plt.show()
+
+	#Test Gradient Descent algoirithm, Stochastic (online)
+	alpha = 0.5
+
+	w = np.array(np.ones(2))
+	for i in range(len(englishTot)):
+		w = regression.stochasticGD(englishA[i], englishTot[i], w, alpha)
+	line = w[1]*englishA+w[0]
+	plt.plot(englishA, line, 'g--', englishA, englishTot, 'rs')
+
+	w = np.array(np.ones(2))
+	for i in range(len(frenchTot)):
+		w = regression.stochasticGD(frenchA[i], frenchTot[i], w, alpha)
+	line = w[1]*frenchA+w[0]
+	plt.plot(frenchA, line, 'b--', frenchA, frenchTot, 'ys')
+
 	plt.show()
 
 main()
