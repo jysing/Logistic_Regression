@@ -12,8 +12,8 @@ def main():
 	frenchTot = frenchTot/max(frenchTot)
 	frenchA = frenchA/max(frenchA)
 
-	tol = 10**-6
-	alpha = 0.05
+	tol = 10**-9
+	alpha = 0.005
 	stoch = False
 
 	englishA = np.c_[np.ones(englishA.shape[0]), englishA]
@@ -22,14 +22,13 @@ def main():
 	line = np.dot(englishA, w)
 	print(englishA, englishTot)
 	plt.plot(englishA[:,1], line, 'g--', englishA[:,1], englishTot, 'rs')
-	plt.show()
 
 	frenchA = np.c_[np.ones(frenchA.shape[0]), frenchA]
 	w, epochs = regression.linRegression(frenchA, frenchTot, tol, alpha, stoch)
 	print(w, epochs)
 	line = np.dot(frenchA, w)
 	print(frenchA, frenchTot)
-	plt.plot(frenchA[:,1], line, 'b--', frenchA[:,1], frenchTot, 'rs')
+	plt.plot(frenchA[:,1], line, 'b--', frenchA[:,1], frenchTot, 'ys')
 	plt.show()
 
 main()
