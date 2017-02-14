@@ -5,12 +5,12 @@ import regression
 
 def main():
 	englishTot, englishA = np.loadtxt('english.txt', skiprows=0, unpack=True)
-	englishTot = englishTot/max(englishTot)
-	englishA = englishA/max(englishA)
-
 	frenchTot, frenchA = np.loadtxt('french.txt', skiprows=0, unpack=True)
-	frenchTot = frenchTot/max(frenchTot)
-	frenchA = frenchA/max(frenchA)
+
+	englishTot = englishTot/max(max(englishTot), max(frenchTot))
+	englishA = englishA/max(max(englishA), max(frenchA))
+	frenchTot = frenchTot/max(max(englishTot), max(frenchTot))
+	frenchA = frenchA/max(max(englishA), max(frenchA))
 
 	tol = 10**-9
 	alpha = 0.005
