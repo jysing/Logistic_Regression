@@ -21,7 +21,7 @@ def perc_alg(x, y, w, alpha):
 		x, y = unison_shuffle(x,y)
 		misClassified = 0
 		for i in range(len(y)):
-			x = np.c_[np.ones(x.shape[0]), x]
+			#x = np.c_[np.ones(x.shape[0]), x]
 			if np.dot(x, w) >= 0: h = 1
 			else : h = -1	
 
