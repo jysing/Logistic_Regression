@@ -17,18 +17,23 @@ def read_svm_file(data_file_name):
 
 # Perceptron learning algorithm.
 def perc_alg(x, y, w, alpha):
-	#while
-	#for
-	x = np.c_[np.ones(x.shape[0]), x]
-	if np.dot(x, w) >= 0: h = 1
-	else : h = -1
+	while True:
+		misClassified = 0
+		for i in range(len(y)):
+			x = np.c_[np.ones(x.shape[0]), x]
+			if np.dot(x, w) >= 0: h = 1
+			else : h = -1	
 
-	if y == 1 and h == -1 :
-		#todo
-		w = w
-	elif y == -1 and h == 1 :
-		#todo
-		w = w
+			if y == 1 and h == -1 :
+				misClassified = misClassified + 1
+				#todo
+				w = w
+			elif y == -1 and h == 1 :
+				misClassified = misClassified + 1
+				#todo
+				w = w
+
+			if misClassified == 0 : break
 
 def unison_shuffle(x, y):
     p = np.random.permutation(len(y))
