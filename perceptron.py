@@ -18,6 +18,7 @@ def read_svm_file(data_file_name):
 # Perceptron learning algorithm.
 def perc_alg(x, y, w, alpha):
 	while True:
+		x, y = unison_shuffle(x,y)
 		misClassified = 0
 		for i in range(len(y)):
 			x = np.c_[np.ones(x.shape[0]), x]
