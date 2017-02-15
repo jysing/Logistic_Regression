@@ -30,6 +30,10 @@ def perc_alg(x, y, w, alpha):
 		#todo
 		w = w
 
+def unison_shuffle(x, y):
+    p = np.random.permutation(len(y))
+    return x[p], y[p]
+
 
 if __name__ == "__main__":
 	y, x = read_svm_file('data')
