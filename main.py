@@ -20,6 +20,8 @@ def main():
 	line = w[1]*englishA+w[0]
 	plt.plot(englishA, line, 'g--', englishA, englishTot, 'rs')
 
+	print(w)
+
 	w, epochs = regression.batchGD(frenchA, frenchTot, tol, alpha)
 	line = w[1]*frenchA+w[0]
 	plt.plot(frenchA, line, 'b--', frenchA, frenchTot, 'ys')
@@ -29,13 +31,15 @@ def main():
 	#Test Gradient Descent algoirithm, Stochastic (online)
 	alpha = 0.5
 
-	w = np.array(np.ones(2))
+	w = [0,1]
 	for i in range(len(englishTot)):
 		w = regression.stochasticGD(englishA[i], englishTot[i], w, alpha)
 	line = w[1]*englishA+w[0]
 	plt.plot(englishA, line, 'g--', englishA, englishTot, 'rs')
 
-	w = np.array(np.ones(2))
+	print(w)
+
+	w = [0,1]
 	for i in range(len(frenchTot)):
 		w = regression.stochasticGD(frenchA[i], frenchTot[i], w, alpha)
 	line = w[1]*frenchA+w[0]
