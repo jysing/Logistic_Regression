@@ -17,10 +17,11 @@ def read_svm_file(data_file_name):
 
 # Perceptron learning algorithm.
 def perc_alg(x, y, w, alpha):
-	if np.dot(x, w) >= 0: 
-		h = 1
-	else :
-		h = -1
+	#while
+	#for
+	x = np.c_[np.ones(x.shape[0]), x]
+	if np.dot(x, w) >= 0: h = 1
+	else : h = -1
 
 	if y == 1 and h == -1 :
 		#todo
@@ -32,3 +33,5 @@ def perc_alg(x, y, w, alpha):
 
 if __name__ == "__main__":
 	y, x = read_svm_file('data')
+	print(y)
+	print(x)
