@@ -33,7 +33,7 @@ def perc_alg(x, y, w, alpha):
 				#todo
 				w = w
 
-			if misClassified == 0 : break
+		if misClassified == 0 : break
 
 def unison_shuffle(x, y):
     p = np.random.permutation(len(y))
