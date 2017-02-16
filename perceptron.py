@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
 	x=np.asarray(x)
 	# 0 = w0 + w1*x1 + w2*x2 => x2 = -w0 -(w1/w2)*x1
-	line = -w[0] - x[:,0]*w[1]/w[2]
+	line = -w[0]/w[2] - x[:,0]*w[1]/w[2]
 
 	plt.plot(x[0:14,0], x[0:14,1], 'r.', x[15:29, 0], x[15:29, 1], 'y.', x[:,0], line, 'g-')
 	plt.show()
