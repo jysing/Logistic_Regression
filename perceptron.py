@@ -98,7 +98,7 @@ if __name__ == "__main__":
 	y, x = read_svm_file('data')
 	x = scale(x)
 	w = [0, 0, 0];
-	alpha = 0.9
+	alpha = 0.5
 	w, iters = perc_alg_reg(x, y, w, alpha)
 
 	#Exclusively used for debugging thus far.
