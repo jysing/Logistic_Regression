@@ -51,8 +51,15 @@ def classify(x, w):
 	z = w[0] + w[1]*arrX[:,0] + w[2]*arrX[:,1]
 	return (z > 0)*2 - 1
 
+def scale(x):
+	arrX = np.asarray(x)
+	for i in range(len(arrX[0,:])):
+		arrX[:,i] = (arrX[:,i] / np.amax(arrX[:,i])).tolist()
+	return arrX.tolist()
+
 if __name__ == "__main__":
 	y, x = read_svm_file('data')
+	x = scale(x)
 	w = [0, 0, 0];
 	alpha = 1
 	w, iters = perc_alg(x, y, w, alpha)
