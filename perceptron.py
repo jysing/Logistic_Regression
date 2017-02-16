@@ -57,7 +57,6 @@ def perc_alg_reg(x, y, w, alpha):
 				w[j] = w[j] + alpha*(currY-h)*h*(1-h)*currX[j]
 		if iters == 10000 : break
 		else : iters = iters + 1
-	print(w)
 	return w, iters
 
 def unison_shuffle(x, y):
@@ -81,8 +80,24 @@ if __name__ == "__main__":
 	y, x = read_svm_file('data')
 	x = scale(x)
 	w = [0, 0, 0];
-	alpha = 0.05
-	#w, iters = perc_alg(x, y, w, alpha)
+	alpha = 0.005
+	w, iters = perc_alg(x, y, w, alpha)
+
+	#Exclusively used for debugging thus far.
+	yHat = classify(x,w)
+	print(yHat-y)
+
+	x=np.asarray(x)
+	# 0 = w0 + w1*x1 + w2*x2 => x2 = -w0 -(w1/w2)*x1
+	line = -w[0]/w[2] - x[:,0]*w[1]/w[2]
+
+	plt.plot(x[0:14,0], x[0:14,1], 'r.', x[15:29, 0], x[15:29, 1], 'y.', x[:,0], line, 'g-')
+	plt.show()
+
+	y, x = read_svm_file('data')
+	x = scale(x)
+	w = [0, 0, 0];
+	alpha = 0.75
 	w, iters = perc_alg_reg(x, y, w, alpha)
 
 	#Exclusively used for debugging thus far.
