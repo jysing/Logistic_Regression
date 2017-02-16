@@ -39,6 +39,7 @@ def perc_alg(x, y, w, alpha):
 					w[j] = w[j] - alpha*currX[j]
 		if misClassified == 0 : break
 		else: iters = iters + 1
+	print(w)
 	return w, iters
 
 def perc_alg_reg(x, y, w, alpha):
@@ -54,8 +55,9 @@ def perc_alg_reg(x, y, w, alpha):
 			h = 1 / (1 + math.exp(-wx))
 			for j in range(len(currX)):
 				w[j] = w[j] + alpha*(currY-h)*h*(1-h)*currX[j]
-		if iters == 1000 : break
+		if iters == 10000 : break
 		else : iters = iters + 1
+	print(w)
 	return w, iters
 
 def unison_shuffle(x, y):
@@ -79,7 +81,7 @@ if __name__ == "__main__":
 	y, x = read_svm_file('data')
 	x = scale(x)
 	w = [0, 0, 0];
-	alpha = 0.5
+	alpha = 0.05
 	#w, iters = perc_alg(x, y, w, alpha)
 	w, iters = perc_alg_reg(x, y, w, alpha)
 
