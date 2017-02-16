@@ -31,8 +31,8 @@ def main():
 	yellow_patch = mpatches.Patch(color='yellow', label='French')
 	plt.legend(handles=[red_patch, yellow_patch], loc=4)
 
-	plt.xlabel('Total number of letters')
-	plt.ylabel('Number of A')
+	plt.ylabel('Total number of letters')
+	plt.xlabel('Number of A')
 	plt.title('Gradient Descent, Batch')
 
 	plt.show()
@@ -58,8 +58,8 @@ def main():
 	yellow_patch = mpatches.Patch(color='yellow', label='French')
 	plt.legend(handles=[red_patch, yellow_patch], loc=4)
 
-	plt.xlabel('Total number of letters')
-	plt.ylabel('Number of A')
+	plt.ylabel('Total number of letters')
+	plt.xlabel('Number of A')
 	plt.title('Stochastic Gradient Descent, online')
 
 	plt.show()
