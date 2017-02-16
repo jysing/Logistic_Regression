@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 import regression
 
@@ -26,6 +27,14 @@ def main():
 	line = w[1]*frenchA+w[0]
 	plt.plot(frenchA, line, 'b--', frenchA, frenchTot, 'ys')
 
+	red_patch = mpatches.Patch(color='red', label='English')
+	yellow_patch = mpatches.Patch(color='yellow', label='French')
+	plt.legend(handles=[red_patch, yellow_patch], loc=4)
+
+	plt.xlabel('Total number of letters')
+	plt.ylabel('Number of A')
+	plt.title('Gradient Descent, Batch')
+
 	plt.show()
 
 	#Test Gradient Descent algoirithm, Stochastic (online)
@@ -44,6 +53,14 @@ def main():
 		w = regression.stochasticGD(frenchA[i], frenchTot[i], w, alpha)
 	line = w[1]*frenchA+w[0]
 	plt.plot(frenchA, line, 'b--', frenchA, frenchTot, 'ys')
+
+	red_patch = mpatches.Patch(color='red', label='English')
+	yellow_patch = mpatches.Patch(color='yellow', label='French')
+	plt.legend(handles=[red_patch, yellow_patch], loc=4)
+
+	plt.xlabel('Total number of letters')
+	plt.ylabel('Number of A')
+	plt.title('Stochastic Gradient Descent, online')
 
 	plt.show()
 
