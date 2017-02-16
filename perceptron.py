@@ -39,7 +39,6 @@ def perc_alg(x, y, w, alpha):
 					w[j] = w[j] - alpha*currX[j]
 		if misClassified == 0 : break
 		else: iters = iters + 1
-	print(w)
 	return w, iters
 
 def perc_alg_reg(x, y, w, alpha):
@@ -55,7 +54,9 @@ def perc_alg_reg(x, y, w, alpha):
 			h = 1 / (1 + math.exp(-wx))
 			for j in range(len(currX)):
 				w[j] = w[j] + alpha*(currY-h)*h*(1-h)*currX[j]
-		if iters == 10000 : break
+		yHat = classify(x,w)
+		endCond = yHat - y
+		if max(abs(i) for i in endCond) == 0 : break
 		else : iters = iters + 1
 	return w, iters
 
@@ -97,7 +98,7 @@ if __name__ == "__main__":
 	y, x = read_svm_file('data')
 	x = scale(x)
 	w = [0, 0, 0];
-	alpha = 0.75
+	alpha = 0.9
 	w, iters = perc_alg_reg(x, y, w, alpha)
 
 	#Exclusively used for debugging thus far.
