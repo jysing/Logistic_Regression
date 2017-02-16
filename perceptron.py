@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 # Read LIBSVM-format data.
 def read_svm_file(data_file_name):
@@ -40,6 +41,23 @@ def perc_alg(x, y, w, alpha):
 		else: iters = iters + 1
 	return w, iters
 
+def perc_alg_reg(x, y, w, alpha):
+	iters = 1
+	while True:
+		x, y = unison_shuffle(x,y)
+		for i in range(len(y)):
+			currX = list(x[i]) #Copies x[i]
+			currX.insert(0, 1)
+			currY = y[i]
+			if currY == -1 : currY = 0
+			wx = np.dot(currX, w)
+			h = 1 / (1 + math.exp(-wx))
+			for j in range(len(currX)):
+				w[j] = w[j] + alpha*(currY-h)*h*(1-h)*currX[j]
+		if iters == 1000 : break
+		else : iters = iters + 1
+	return w, iters
+
 def unison_shuffle(x, y):
     p = np.random.permutation(len(y))
     x = np.asarray(x)[p].tolist()
@@ -61,8 +79,9 @@ if __name__ == "__main__":
 	y, x = read_svm_file('data')
 	x = scale(x)
 	w = [0, 0, 0];
-	alpha = 1
-	w, iters = perc_alg(x, y, w, alpha)
+	alpha = 0.5
+	#w, iters = perc_alg(x, y, w, alpha)
+	w, iters = perc_alg_reg(x, y, w, alpha)
 
 	#Exclusively used for debugging thus far.
 	yHat = classify(x,w)
