@@ -20,7 +20,7 @@ def main():
 	line = -w[0]/w[2] - x[:,0]*w[1]/w[2]
 
 	plt.plot(x[0:14,0], x[0:14,1], 'y.', x[15:29, 0], x[15:29, 1], 'r.', x[:,0], line, 'g-')
-	
+
 	red_patch = mpatches.Patch(color='red', label='English')
 	yellow_patch = mpatches.Patch(color='yellow', label='French')
 	plt.legend(handles=[red_patch, yellow_patch], loc=4)
@@ -35,7 +35,8 @@ def main():
 	x = perceptron.scale(x)
 	w = [0, 0, 0];
 	alpha = 0.5
-	w, iters = perceptron.perc_alg_reg(x, y, w, alpha)
+	epsilon = 1e-3
+	w, iters = perceptron.perc_alg_reg(x, y, w, alpha, epsilon)
 
 	#Exclusively used for debugging thus far.
 	yHat = perceptron.classify(x,w)
@@ -46,7 +47,7 @@ def main():
 	line = -w[0]/w[2] - x[:,0]*w[1]/w[2]
 
 	plt.plot(x[0:14,0], x[0:14,1], 'y.', x[15:29, 0], x[15:29, 1], 'r.', x[:,0], line, 'g-')
-	
+
 	red_patch = mpatches.Patch(color='red', label='English')
 	yellow_patch = mpatches.Patch(color='yellow', label='French')
 	plt.legend(handles=[red_patch, yellow_patch], loc=4)

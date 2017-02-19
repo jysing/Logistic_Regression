@@ -40,9 +40,10 @@ def perc_alg(x, y, w, alpha):
 		else: iters = iters + 1
 	return w, iters
 
-def perc_alg_reg(x, y, w, alpha):
-	iters = 1
-	while True:
+def perc_alg_reg(x, y, w, alpha, epsilon):
+	iters = 0
+	endCond = False
+	while endCond == False:
 		x, y = unison_shuffle(x,y)
 		for i in range(len(y)):
 			currX = list(x[i]) #Copies x[i]
@@ -51,12 +52,16 @@ def perc_alg_reg(x, y, w, alpha):
 			if currY == -1 : currY = 0
 			wx = np.dot(currX, w)
 			h = 1 / (1 + math.exp(-wx))
+			sqLossGrad = 0
 			for j in range(len(currX)):
-				w[j] = w[j] + alpha*(currY-h)*h*(1-h)*currX[j]
-		yHat = classify(x,w)
-		endCond = yHat - y
-		if max(abs(i) for i in endCond) == 0 : break
-		else : iters = iters + 1
+				lossGrad = (currY-h)*h*(1-h)*currX[j]
+				w[j] = w[j] + alpha*lossGrad
+				sqLossGrad += lossGrad**2
+			print(np.sqrt(sqLossGrad))
+			if np.sqrt(sqLossGrad) < epsilon:
+				endCond = True
+				break
+		iters = iters + 1
 	return w, iters
 
 def unison_shuffle(x, y):
