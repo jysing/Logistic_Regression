@@ -41,6 +41,7 @@ def main():
 	alpha = 0.5
 
 	w = [0,1]
+	englishA, englishTot = shuffle(englishA, englishTot)
 	for i in range(len(englishTot)):
 		w = regression.stochasticGD(englishA[i], englishTot[i], w, alpha)
 	line = w[1]*englishA+w[0]
@@ -49,6 +50,7 @@ def main():
 	print(w)
 
 	w = [0,1]
+	frenchA, frenchTot = shuffle(frenchA, frenchTot)
 	for i in range(len(frenchTot)):
 		w = regression.stochasticGD(frenchA[i], frenchTot[i], w, alpha)
 	line = w[1]*frenchA+w[0]
@@ -63,5 +65,9 @@ def main():
 	plt.title('Stochastic Gradient Descent, online')
 
 	plt.show()
+
+def shuffle(x, y):
+	p = np.random.permutation(len(y))
+	return x[p], y[p]
 
 main()

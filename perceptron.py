@@ -57,7 +57,6 @@ def perc_alg_reg(x, y, w, alpha, epsilon):
 				lossGrad = (currY-h)*h*(1-h)*currX[j]
 				w[j] = w[j] + alpha*lossGrad
 				sqLossGrad += lossGrad**2
-			print(np.sqrt(sqLossGrad))
 			if np.sqrt(sqLossGrad) < epsilon:
 				endCond = True
 				break
